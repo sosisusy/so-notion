@@ -2,6 +2,7 @@
 
 namespace SoNotion\Resources;
 
+use Illuminate\Support\Arr;
 use SoNotion\Resources\Files\UploadedFile;
 use SoNotion\Resources\Resource;
 
@@ -35,14 +36,11 @@ class Icon extends Resource
 
     function getHiddenProperties(): array
     {
-        switch ($this->type) {
-            case "emoji":
-                return ["file"];
-            case "file":
-                return ["emoji"];
-        }
+        $hidden = ["file", "emoji"];
 
-        return [];
+        return Arr::where($hidden, function ($value) {
+            return $value != $this->type;
+        });
     }
 
     function getType()

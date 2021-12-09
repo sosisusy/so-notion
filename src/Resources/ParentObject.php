@@ -2,6 +2,7 @@
 
 namespace SoNotion\Resources;
 
+use Illuminate\Support\Arr;
 use SoNotion\Resources\Resource;
 
 /**
@@ -39,16 +40,11 @@ class ParentObject extends Resource
 
     function getHiddenProperties(): array
     {
-        switch ($this->type) {
-            case "page_id":
-                return ["workspace", "database_id"];
-            case "workspace":
-                return ["page_id", "database_id"];
-            case "database_id":
-                return ["workspace", "page_id"];
-        }
+        $hidden = ["page_id", "workspace", "database_id"];
 
-        return [];
+        return Arr::where($hidden, function ($value) {
+            return $value != $this->type;
+        });
     }
 
     function getType()

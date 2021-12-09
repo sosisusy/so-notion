@@ -23,6 +23,8 @@ class Database extends Resource
 
     protected string $last_edited_time;
 
+    protected ?array $title;
+
     protected ?Icon $icon = null;
 
     protected ?File $cover = null;
@@ -39,11 +41,21 @@ class Database extends Resource
         $this->id = $data["id"];
         $this->created_time = $data["created_time"];
         $this->last_edited_time = $data["last_edited_time"];
+        $this->title = $this->makeTitle($data["title"]);
         $this->icon = !empty($data["icon"]) ? Icon::new($data["icon"]) : null;
         $this->cover = !empty($data["cover"]) ? File::new($data["cover"]) : null;
         $this->properties = $data["properties"];
         $this->parent = ParentObject::new($data["parent"]);
         $this->url = $data["url"];
+    }
+
+    function makeTitle(array $title)
+    {
+        $results = [];
+
+        foreach ($title as $item) $results[] = RichText::new($item);
+
+        return $results;
     }
 
     function getObject()
@@ -64,6 +76,11 @@ class Database extends Resource
     function getLastEditedTime()
     {
         return $this->last_edited_time;
+    }
+
+    function getTitle()
+    {
+        return $this->title;
     }
 
     function getIcon()

@@ -41,6 +41,7 @@ abstract class Resource implements Jsonable, Arrayable
         }
 
         foreach ($ref->getProperties() as $property) {
+            $property->setAccessible(true);
             $name = Str::snake($property->getName());
             $value = $property->getValue($this);
 

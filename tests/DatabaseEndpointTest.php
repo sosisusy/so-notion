@@ -31,14 +31,12 @@ class DatabaseEndpointTest extends SoNotionTest
     function 데이터베이스_목록_조회()
     {
         $testData = json_decode(file_get_contents('tests/responses/databases/database_all_200.json'), true);
+
         Http::fake([
             'https://api.notion.com/v1/databases' => Http::response($testData, 200, ['Headers']),
         ]);
 
         $results = SoNotionFacade::database()->all();
-
-        dd($testData);
-        dd($results->toArray());
 
         $this->assertInstanceOf(Collection::class, $results);
         $this->assertEquals($testData, $results->toArray());
@@ -55,6 +53,7 @@ class DatabaseEndpointTest extends SoNotionTest
     function 데이터베이스_목록_401_권한_예외()
     {
         $testData = json_decode(file_get_contents('tests/responses/databases/database_401.json'), true);
+
         Http::fake([
             'https://api.notion.com/v1/databases' => Http::response($testData, 401, ['Headers']),
         ]);
@@ -71,6 +70,7 @@ class DatabaseEndpointTest extends SoNotionTest
     function 단일_데이터베이스_조회()
     {
         $testData = json_decode(file_get_contents('tests/responses/databases/database_find_200.json'), true);
+
         Http::fake([
             'https://api.notion.com/v1/databases/' . $this->dbId => Http::response($testData, 200, ['Headers']),
         ]);
@@ -78,5 +78,6 @@ class DatabaseEndpointTest extends SoNotionTest
         $result = SoNotionFacade::database()->find($this->dbId);
 
         $this->assertInstanceOf(ResourcesDatabase::class, $result);
+        $this->assertEquals($testData, $result->toArray());
     }
 }
