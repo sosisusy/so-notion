@@ -1,0 +1,43 @@
+{
+    "name": "sosisusy/so-notion",
+    "description": "A package that makes it easier to use the Notion API at Laravel",
+    "type": "library",
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "6.*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "sosisusy",
+            "email": "qwexodn@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SoNotion\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "./vender/bin/phpunit"
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SoNotion\\SoNotionServiceProvider"
+            ],
+            "aliases": {
+                "SoNotion": "SoNotion\\SoNotionFacade"
+            }
+        }
+    }
+}

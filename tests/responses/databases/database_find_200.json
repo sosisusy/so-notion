@@ -1,0 +1,65 @@
+{
+    "object": "database",
+    "id": "d9c319a6-08f0-4cd4-a1d6-2a737f557ff9",
+    "cover": {
+        "type": "external",
+        "external": {
+            "url": "https://www.notion.so/images/page-cover/met_vincent_van_gogh_irises.jpg"
+        }
+    },
+    "icon": {
+        "type": "file",
+        "file": {
+            "url": "https://s3.us-west-2.amazonaws.com/secure.notion-static.com/41e71ea9-f4c7-4d6c-9241-25c9d30ac90a/example512x512.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20211209%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211209T092118Z&X-Amz-Expires=3600&X-Amz-Signature=d546a44f9d77ca924fc2a51a7b1563fcaab6596b54204f916959ef01bee56fe2&X-Amz-SignedHeaders=host&x-id=GetObject",
+            "expiry_time": "2021-12-09T10:21:18.029Z"
+        }
+    },
+    "created_time": "2021-07-07T02:13:00.000Z",
+    "last_edited_time": "2021-12-08T02:30:00.000Z",
+    "title": [
+        {
+            "type": "text",
+            "text": {
+                "content": "skakhtyjrjtyj",
+                "link": null
+            },
+            "annotations": {
+                "bold": false,
+                "italic": false,
+                "strikethrough": false,
+                "underline": false,
+                "code": false,
+                "color": "default"
+            },
+            "plain_text": "skakhtyjrjtyj",
+            "href": null
+        }
+    ],
+    "properties": {
+        "태그": {
+            "id": "%40Sua",
+            "name": "태그",
+            "type": "multi_select",
+            "multi_select": {
+                "options": []
+            }
+        },
+        "열": {
+            "id": "%7CNf%3C",
+            "name": "열",
+            "type": "people",
+            "people": {}
+        },
+        "이름": {
+            "id": "title",
+            "name": "이름",
+            "type": "title",
+            "title": {}
+        }
+    },
+    "parent": {
+        "type": "workspace",
+        "workspace": true
+    },
+    "url": "https://www.notion.so/d9c319a608f04cd4a1d62a737f557ff9"
+}
