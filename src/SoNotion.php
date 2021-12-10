@@ -4,10 +4,12 @@ namespace SoNotion;
 
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Validation\UnauthorizedException;
 use InvalidArgumentException;
 use SoNotion\Endpoints\Database;
 use SoNotion\Exceptions\SoNotionBadRequestException;
 use SoNotion\Exceptions\SoNotionUnauthorizedException;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class SoNotion
 {
@@ -94,9 +96,9 @@ class SoNotion
 
             switch ($res->status()) {
                 case 401:
-                    throw new SoNotionUnauthorizedException($body["message"] ?? "", $res->status());
+                    throw new UnauthorizedException($body["message"] ?? "", $res->status());
                 case 400:
-                    throw new SoNotionBadRequestException($body["message"] ?? "", $res->status());
+                    throw new BadRequestException($body["message"] ?? "", $res->status());
             }
         }
 

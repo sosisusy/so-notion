@@ -3,74 +3,87 @@
 namespace SoNotion\Resources;
 
 use ReflectionClass;
-use Illuminate\Support\Str;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Contracts\Support\Arrayable;
-use Nette\NotImplementedException;
 
-abstract class Resource implements Jsonable, Arrayable
+class Resource implements Jsonable, Arrayable
 {
-    abstract function __construct(array $data);
 
-    public static function new(array $data): Resource
+    function __construct(array $data)
+    {
+        $this->fillProperties($data);
+    }
+
+    static function new(array $data)
     {
         return new static($data);
     }
 
-    public static function fromJson(string $data): Resource
+    function fillProperties(array $data)
     {
-        $data = json_decode($data, false);
+        foreach ($this->getResourceProperties() as $property) {
+            $name = $property->getName();
+            $type = $property->getType()->getName();
+            $value = $data[$name] ?? null;
 
-        return new static($data);
-    }
-
-    public function toJson($options = 0)
-    {
-        return json_encode($this->toArray(), $options | JSON_UNESCAPED_UNICODE);
-    }
-
-    public function toArray()
-    {
-        $results = [];
-        $hidden = [];
-        $ref = new ReflectionClass($this);
-
-        try {
-            $hidden = $this->getHiddenProperties();
-        } catch (NotImplementedException $e) {
+            switch (true) {
+                case !empty($value) && is_subclass_of($type, Resource::class):
+                    $this->{$name} = $type::new($value);
+                    break;
+                case $type == "object":
+                    $this->{$name} = !empty($value) ? (object) $value : null;
+                    break;
+                default:
+                    $this->{$name} = $value ?? null;
+            }
         }
+    }
 
-        foreach ($ref->getProperties() as $property) {
+    final function toJson($options = 0)
+    {
+        return json_encode($this->toArray(), JSON_UNESCAPED_UNICODE | $options);
+    }
+
+    final function toArray()
+    {
+        $contents = [];
+
+        foreach ($this->getResourceProperties() as $property) {
             $property->setAccessible(true);
-            $name = Str::snake($property->getName());
+            $name = $property->getName();
             $value = $property->getValue($this);
 
-            if (in_array($name, $hidden)) continue;
-
-            $results[$name] = $this->toArrayValue($value);
+            $contents[$name] = $this->getRawContents($value);
         }
 
-        return $results;
+        return $contents;
     }
 
-    public function toArrayValue($value)
+    final function getResourceProperties()
+    {
+        $ref = new ReflectionClass($this);
+
+        return $ref->getProperties();
+    }
+
+    final function getRawContents($value)
     {
         if (is_object($value) && method_exists($value, "toArray")) return $value->toArray();
         if (is_array($value)) {
             $results = [];
-            foreach ($value as $k => $item) $results[$k] = $this->toArrayValue($item);
+
+            foreach ($value as $k => $v) $results[$k] = $this->getRawContents($v);
+
+            return $results;
+        }
+        if (is_object($value)) {
+            $results = [];
+
+            foreach ((array) $value as $k => $v) $results[$k] = $this->getRawContents($v);
 
             return $results;
         }
 
         return $value;
-    }
-
-    /**
-     * toArray 메서드를 호출 할 때 감출 속성 목록
-     */
-    public function getHiddenProperties(): array
-    {
-        throw new NotImplementedException();
     }
 }
