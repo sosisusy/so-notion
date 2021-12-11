@@ -6,7 +6,7 @@ use SoNotion\Resources\Materials\Files;
 
 class FilesProperty extends Property
 {
-    protected Files $files;
+    protected ?Files $files;
 
     function getFiles()
     {

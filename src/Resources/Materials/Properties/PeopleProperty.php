@@ -6,7 +6,7 @@ use SoNotion\Resources\Materials\People;
 
 class PeopleProperty extends Property
 {
-    protected People $people;
+    protected ?People $people;
 
     function getPeople()
     {

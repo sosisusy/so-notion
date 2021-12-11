@@ -3,52 +3,141 @@
     "results": [
         {
             "object": "page",
-            "id": "2e01e904-febd-43a0-ad02-8eedb903a82c",
-            "created_time": "2020-03-17T19:10:04.968Z",
-            "last_edited_time": "2020-03-17T21:49:37.913Z",
+            "id": "f7abf4fb-1cab-4706-b45d-a48b20ed64a8",
+            "created_time": "2021-12-08T02:32:00.000Z",
+            "last_edited_time": "2021-12-10T03:44:00.000Z",
+            "cover": null,
+            "icon": null,
             "parent": {
                 "type": "database_id",
-                "database_id": "897e5a76-ae52-4b48-9fdf-e71f5945d1af"
+                "database_id": "a3cc6ba5-fe39-4397-a9b9-c7c645701f09"
             },
             "archived": false,
-            "url": "https://www.notion.so/2e01e904febd43a0ad028eedb903a82c",
             "properties": {
-                "Recipes": {
-                    "id": "Ai`L",
-                    "type": "relation",
-                    "relation": [
+                "속성 2": {
+                    "id": "C%3F%7BL",
+                    "type": "date",
+                    "date": null
+                },
+                "속성 7": {
+                    "id": "DAhh",
+                    "type": "email",
+                    "email": null
+                },
+                "속성 6": {
+                    "id": "D~Q%40",
+                    "type": "url",
+                    "url": null
+                },
+                "상태": {
+                    "id": "F%3EW%3D",
+                    "type": "select",
+                    "select": {
+                        "id": "2",
+                        "name": "진행 중",
+                        "color": "yellow"
+                    }
+                },
+                "속성 8": {
+                    "id": "GTOV",
+                    "type": "phone_number",
+                    "phone_number": null
+                },
+                "속성": {
+                    "id": "L%3D%3B%5B",
+                    "type": "multi_select",
+                    "multi_select": []
+                },
+                "담당자": {
+                    "id": "Lg_%7C",
+                    "type": "people",
+                    "people": [
                         {
-                            "id": "796659b4-a5d9-4c64-a539-06ac5292779e"
-                        },
-                        {
-                            "id": "79e63318-f85a-4909-aceb-96a724d1021c"
+                            "object": "user",
+                            "id": "2d272142-a205-47c2-8c66-7e7ab713bf30",
+                            "name": "sosisusy s",
+                            "avatar_url": "https://lh3.googleusercontent.com/a-/AOh14GgD49tGfEy0jA-8AGNtcQDY-ywivDS6Tq58rJdepw=s100",
+                            "type": "person",
+                            "person": {
+                                "email": "qwexodn@gmail.com"
+                            }
                         }
                     ]
                 },
-                "Cost of next trip": {
-                    "id": "R}wl",
+                "속성 11": {
+                    "id": "O%3B~E",
+                    "type": "created_by",
+                    "created_by": {
+                        "object": "user",
+                        "id": "2d272142-a205-47c2-8c66-7e7ab713bf30",
+                        "name": "sosisusy s",
+                        "avatar_url": "https://lh3.googleusercontent.com/a-/AOh14GgD49tGfEy0jA-8AGNtcQDY-ywivDS6Tq58rJdepw=s100",
+                        "type": "person",
+                        "person": {
+                            "email": "qwexodn@gmail.com"
+                        }
+                    }
+                },
+                "속성 1": {
+                    "id": "VM~B",
+                    "type": "number",
+                    "number": null
+                },
+                "속성 9": {
+                    "id": "%5EwAr",
                     "type": "formula",
                     "formula": {
-                        "type": "number",
-                        "number": 2
+                        "type": "string",
+                        "string": null
                     }
                 },
-                "Last ordered": {
-                    "id": "UsKi",
-                    "type": "date",
-                    "date": {
-                        "start": "2020-10-07",
-                        "end": null
-                    }
+                "속성 3": {
+                    "id": "adI%3B",
+                    "type": "people",
+                    "people": []
                 },
-                "In stock": {
-                    "id": "{>U;",
+                "속성 4": {
+                    "id": "l%60%3DR",
+                    "type": "files",
+                    "files": []
+                },
+                "속성 10": {
+                    "id": "sVkN",
+                    "type": "relation",
+                    "relation": []
+                },
+                "속성 5": {
+                    "id": "wNeE",
                     "type": "checkbox",
                     "checkbox": false
+                },
+                "이름": {
+                    "id": "title",
+                    "type": "title",
+                    "title": [
+                        {
+                            "type": "text",
+                            "text": {
+                                "content": "카드 1",
+                                "link": null
+                            },
+                            "annotations": {
+                                "bold": false,
+                                "italic": false,
+                                "strikethrough": false,
+                                "underline": false,
+                                "code": false,
+                                "color": "default"
+                            },
+                            "plain_text": "카드 1",
+                            "href": null
+                        }
+                    ]
                 }
-            }
+            },
+            "url": "https://www.notion.so/1-f7abf4fb1cab4706b45da48b20ed64a8"
         }
     ],
-    "has_more": false,
-    "next_cursor": null
+    "next_cursor": null,
+    "has_more": false
 }

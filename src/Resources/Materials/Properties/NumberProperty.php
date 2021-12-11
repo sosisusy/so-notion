@@ -6,7 +6,7 @@ use SoNotion\Resources\Materials\Number;
 
 class NumberProperty extends Property
 {
-    protected Number $number;
+    protected ?Number $number;
 
     function getNumber()
     {

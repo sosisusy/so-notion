@@ -6,7 +6,7 @@ use SoNotion\Resources\Materials\RichText;
 
 class RichTextProperty extends Property
 {
-    protected RichText $rich_text;
+    protected ?RichText $rich_text;
 
     function getRichText()
     {

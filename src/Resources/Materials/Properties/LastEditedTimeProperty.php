@@ -6,7 +6,7 @@ use SoNotion\Resources\Materials\LastEditedTime;
 
 class LastEditedTimeProperty extends Property
 {
-    protected LastEditedTime $last_edited_time;
+    protected ?LastEditedTime $last_edited_time;
 
     function getLastEditedTime()
     {

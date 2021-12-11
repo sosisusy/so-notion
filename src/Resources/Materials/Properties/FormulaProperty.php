@@ -6,7 +6,7 @@ use SoNotion\Resources\Materials\Formula;
 
 class FormulaProperty extends Property
 {
-    protected Formula $formula;
+    protected ?Formula $formula;
 
     function getFormula()
     {

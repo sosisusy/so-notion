@@ -6,7 +6,21 @@ use SoNotion\Resources\Materials\Checkbox;
 
 class CheckboxProperty extends Property
 {
-    protected Checkbox $checkbox;
+    protected $checkbox;
+
+    function fillProperties(array $data)
+    {
+        $this->fillCheckbox($data);
+    }
+
+    function fillCheckbox(array $data)
+    {
+        if (!isset($data['checkbox'])) return;
+
+        if (is_array($data['checkbox'])) $this->checkbox = Checkbox::new($data['checkbox']);
+
+        $this->checkbox = $data['checkbox'];
+    }
 
     function getCheckbox()
     {

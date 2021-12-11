@@ -6,7 +6,7 @@ use SoNotion\Resources\Materials\Date;
 
 class DateProperty extends Property
 {
-    protected Date $date;
+    protected ?Date $date;
 
     function getDate()
     {

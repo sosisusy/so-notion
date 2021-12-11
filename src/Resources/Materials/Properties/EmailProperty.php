@@ -6,7 +6,7 @@ use SoNotion\Resources\Materials\Email;
 
 class EmailProperty extends Property
 {
-    protected Email $email;
+    protected ?Email $email;
 
     function getEmail()
     {

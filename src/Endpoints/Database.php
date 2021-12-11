@@ -2,6 +2,7 @@
 
 namespace SoNotion\Endpoints;
 
+use SoNotion\Endpoints\Builders\DatabaseQueryBuilder;
 use SoNotion\Resources\Entities\Database as EntitiesDatabase;
 use SoNotion\Resources\Lists\DatabaseList;
 
@@ -36,7 +37,11 @@ class Database extends Endpoint
         return new EntitiesDatabase($body);
     }
 
-    function query()
+    /**
+     * 쿼리 빌더 리턴
+     */
+    function query(string $dbId)
     {
+        return new DatabaseQueryBuilder($this->notion, $dbId);
     }
 }

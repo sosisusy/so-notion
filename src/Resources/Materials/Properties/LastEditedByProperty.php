@@ -6,7 +6,7 @@ use SoNotion\Resources\Materials\LastEditedBy;
 
 class LastEditedByProperty extends Property
 {
-    protected LastEditedBy $last_edited_by;
+    protected ?LastEditedBy $last_edited_by;
 
     function getLastEditedBy()
     {

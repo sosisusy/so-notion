@@ -5,8 +5,12 @@ namespace Tests\Endpoints;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\UnauthorizedException;
 use SoNotion\Endpoints\Database;
+use SoNotion\Query\Filters\FilterOperator;
+use SoNotion\Query\Filters\FilterType;
+use SoNotion\Query\Sort;
 use SoNotion\Resources\Entities\Database as EntitiesDatabase;
 use SoNotion\Resources\Lists\DatabaseList;
+use SoNotion\Resources\Lists\PageList;
 use Tests\SoNotionTest;
 use SoNotion\SoNotionFacade;
 
@@ -121,5 +125,27 @@ class DatabaseEndpointTest extends SoNotionTest
         $this->badRequestException();
 
         SoNotionFacade::database()->find('a3cc6ba5fe394397a9b9c7c645701f0');
+    }
+
+    /**
+     * @test
+     */
+    function 데이터베이스_쿼리_조회()
+    {
+        $testData = json_decode(file_get_contents('tests/responses/databases/database_query_200.json'), true);
+        $expectParams = json_decode(file_get_contents('tests/responses/databases/database_query_params.json'), true);
+
+        Http::fake([
+            'https://api.notion.com/v1/databases/a3cc6ba5fe394397a9b9c7c645701f09/query' => Http::response($testData, 200, ['Headers']),
+        ]);
+
+        $query = SoNotionFacade::database()
+            ->query('a3cc6ba5fe394397a9b9c7c645701f09')
+            ->addFilter(FilterType::TEXT, '이름', [FilterOperator::CONTAINS => '카드 1'])
+            ->addSort('이름', null, Sort::DIRECTION_DESC)
+            ->pageSize(50);
+
+        $this->assertEquals($expectParams, $query->getParams());
+        $this->assertInstanceOf(PageList::class, $query->get());
     }
 }

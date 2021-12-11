@@ -36,7 +36,6 @@ class Resource implements Jsonable, Arrayable
                     $this->{$name} = !empty($value) ? (object) $value : null;
                     break;
                 default:
-                    if ($name == "file") dd($type, $value, is_subclass_of($type, Resource::class));
                     $this->{$name} = $value ?? null;
             }
         }

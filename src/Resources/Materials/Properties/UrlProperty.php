@@ -6,7 +6,7 @@ use SoNotion\Resources\Materials\Url;
 
 class UrlProperty extends Property
 {
-    protected Url $url;
+    protected ?Url $url;
 
     function getUrl()
     {

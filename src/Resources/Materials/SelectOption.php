@@ -6,9 +6,9 @@ use SoNotion\Resources\Resource;
 
 class SelectOption extends Resource
 {
-    protected string $name;
-    protected string $id;
-    protected string $color;
+    protected ?string $name;
+    protected ?string $id;
+    protected ?string $color;
 
     function getName()
     {

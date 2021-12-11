@@ -19,11 +19,11 @@ class Sort extends Query
     protected string $timestamp;
     protected string $direction;
 
-    function __construct(string $property, string $timestamp = 'created_time', string $direction = 'ascending')
+    function __construct(string $property, ?string $timestamp = null, ?string $direction = null)
     {
         $this->property = $property;
-        $this->timestamp = $timestamp;
-        $this->direction = $direction;
+        $this->timestamp = $timestamp ?? static::TIMESTAMP_CREATED_TIME;
+        $this->direction = $direction ?? static::DIRECTION_ASC;
 
         $this->validate();
     }

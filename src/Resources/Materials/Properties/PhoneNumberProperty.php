@@ -6,7 +6,7 @@ use SoNotion\Resources\Materials\PhoneNumber;
 
 class PhoneNumberProperty extends Property
 {
-    protected PhoneNumber $phone_number;
+    protected ?PhoneNumber $phone_number;
 
     function getPhoneNumber()
     {

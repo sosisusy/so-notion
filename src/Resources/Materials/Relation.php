@@ -6,7 +6,7 @@ use SoNotion\Resources\Resource;
 
 class Relation extends Resource
 {
-    protected string $database_id;
+    protected ?string $database_id;
     protected ?string $synced_property_name = null;
     protected ?string $synced_property_id = null;
 

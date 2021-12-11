@@ -6,7 +6,7 @@ use SoNotion\Resources\Materials\CreatedTime;
 
 class CreatedTimeProperty extends Property
 {
-    protected CreatedTime $created_time;
+    protected ?CreatedTime $created_time;
 
     function getCreatedTime()
     {

@@ -6,7 +6,7 @@ use SoNotion\Resources\Materials\Relation;
 
 class RelationProperty extends Property
 {
-    protected Relation $relation;
+    protected ?Relation $relation;
 
     function getRelation()
     {

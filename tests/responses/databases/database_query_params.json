@@ -1,0 +1,20 @@
+{
+    "filter": {
+        "or": [
+            {
+                "property": "이름",
+                "text": {
+                    "contains": "카드 1"
+                }
+            }
+        ]
+    },
+    "sorts": [
+        {
+            "property": "이름",
+            "direction": "descending",
+            "timestamp": "created_time"
+        }
+    ],
+    "page_size": 50
+}

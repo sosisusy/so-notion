@@ -6,7 +6,7 @@ use SoNotion\Resources\Materials\Title;
 
 class TitleProperty extends Property
 {
-    protected Title $title;
+    protected ?Title $title;
 
     function getTitle()
     {

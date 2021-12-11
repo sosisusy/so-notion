@@ -6,7 +6,7 @@ use SoNotion\Resources\Materials\Rollup;
 
 class RollupProperty extends Property
 {
-    protected Rollup $rollup;
+    protected ?Rollup $rollup;
 
     function getRollup()
     {
