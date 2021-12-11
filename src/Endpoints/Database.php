@@ -35,4 +35,8 @@ class Database extends Endpoint
 
         return new EntitiesDatabase($body);
     }
+
+    function query()
+    {
+    }
 }

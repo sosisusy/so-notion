@@ -33,4 +33,12 @@ class SoNotionTest extends TestCase
     {
         $this->expectException(UnauthorizedException::class);
     }
+
+    /**
+     * @test
+     */
+    function 패스()
+    {
+        $this->assertTrue(true);
+    }
 }

@@ -16,10 +16,8 @@ class DatabaseList extends EntityList
 
     function fillResults(array $data)
     {
-        if (empty($data["results"])) return;
-
         $this->results = [];
 
-        foreach ($data["results"] as $k => $result) $this->results[$k] = new Database($result);
+        foreach ($data["results"] ?? [] as $k => $result) $this->results[$k] = new Database($result);
     }
 }

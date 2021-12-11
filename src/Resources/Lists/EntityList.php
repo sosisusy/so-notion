@@ -6,26 +6,10 @@ use SoNotion\Resources\Resource;
 
 class EntityList extends Resource
 {
-    protected ?string $object = null;
-    protected ?string $start_cursor = null;
-    protected ?int $page_size = null;
-    protected ?bool $has_more = null;
+    protected string $object;
+    protected bool $has_more;
     protected ?string $next_cursor = null;
-    protected ?array $results = null;
-
-    function setStartCursor(string $curosr)
-    {
-        $this->start_cursor = $curosr;
-
-        return $this;
-    }
-
-    function setPageSize(int $size)
-    {
-        $this->page_size = min($size, 100);
-
-        return $this;
-    }
+    protected array $results;
 
     function getObject()
     {
