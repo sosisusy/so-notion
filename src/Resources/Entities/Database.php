@@ -7,6 +7,7 @@ use SoNotion\Exceptions\HandlingException;
 use SoNotion\Resources\Entities\Entity;
 use SoNotion\Resources\Materials\Emoji\Emoji;
 use SoNotion\Resources\Materials\Files\File;
+use SoNotion\Resources\Materials\Parents\ParentObject;
 use SoNotion\Resources\Materials\Properties\Property;
 use SoNotion\Resources\Materials\RichText;
 
@@ -16,7 +17,7 @@ class Database extends Entity
     protected ?object $icon;
     protected ?File $cover;
     protected array $properties;
-    protected object $parent;
+    protected ParentObject $parent;
     protected string $url;
 
     function fillProperties(array $data)
@@ -45,7 +46,7 @@ class Database extends Entity
 
         switch ($data['icon']['type']) {
             case 'file':
-                $this->icon = File::new(array_merge($data['icon']));
+                $this->icon = File::new($data['icon']);
                 break;
             case 'emoji':
                 $this->icon = Emoji::new($data['icon']);
@@ -80,6 +81,9 @@ class Database extends Entity
         return $text;
     }
 
+    /**
+     * @return null|File|Emoji
+     */
     function getIcon()
     {
         return $this->icon;

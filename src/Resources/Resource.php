@@ -14,8 +14,10 @@ class Resource implements Jsonable, Arrayable
         $this->fillProperties($data);
     }
 
-    static function new(array $data)
+    static function new(?array $data)
     {
+        if (is_null($data)) return null;
+
         return new static($data);
     }
 
@@ -27,13 +29,14 @@ class Resource implements Jsonable, Arrayable
             $value = $data[$name] ?? null;
 
             switch (true) {
-                case !empty($value) && is_subclass_of($type, Resource::class):
+                case is_subclass_of($type, Resource::class):
                     $this->{$name} = $type::new($value);
                     break;
                 case $type == "object":
                     $this->{$name} = !empty($value) ? (object) $value : null;
                     break;
                 default:
+                    if ($name == "file") dd($type, $value, is_subclass_of($type, Resource::class));
                     $this->{$name} = $value ?? null;
             }
         }

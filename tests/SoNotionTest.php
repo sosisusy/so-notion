@@ -2,9 +2,10 @@
 
 namespace Tests;
 
+use Illuminate\Validation\UnauthorizedException;
 use Orchestra\Testbench\TestCase;
-use SoNotion\SoNotionFacade;
 use SoNotion\SoNotionServiceProvider;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class SoNotionTest extends TestCase
 {
@@ -15,5 +16,21 @@ class SoNotionTest extends TestCase
         return [
             SoNotionServiceProvider::class,
         ];
+    }
+
+    /**
+     * badrequest 400
+     */
+    function badRequestException()
+    {
+        $this->expectException(BadRequestException::class);
+    }
+
+    /**
+     * unauthorized 401
+     */
+    function unauthorizedException()
+    {
+        $this->expectException(UnauthorizedException::class);
     }
 }

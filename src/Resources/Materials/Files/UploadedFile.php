@@ -2,6 +2,8 @@
 
 namespace SoNotion\Resources\Materials\Files;
 
+use SoNotion\Resources\Materials\Files\Items\Uploaded;
+
 class UploadedFile extends File
 {
     protected Uploaded $file;

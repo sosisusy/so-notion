@@ -1,6 +1,6 @@
 <?php
 
-namespace SoNotion\Resources\Materials\Files;
+namespace SoNotion\Resources\Materials\Files\Items;
 
 use SoNotion\Resources\Resource;
 

@@ -10,8 +10,10 @@ class Mention extends Resource
 {
     protected string $type;
 
-    static function new(array $data)
+    static function new(?array $data)
     {
+        if (is_null($data)) return null;
+
         $type = Arr::get($data, "type");
 
         switch ($type) {

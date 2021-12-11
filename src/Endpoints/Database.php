@@ -2,9 +2,8 @@
 
 namespace SoNotion\Endpoints;
 
-use SoNotion\Resources\Collection;
-use SoNotion\Resources\Database as ResourcesDatabase;
-use SoNotion\Resources\ResourceGenerator;
+use SoNotion\Resources\Entities\Database as EntitiesDatabase;
+use SoNotion\Resources\Lists\DatabaseList;
 
 /**
  * 데이터베이스 API 
@@ -15,23 +14,25 @@ class Database extends Endpoint
     /**
      * 데이터베이스 전체 목록 조회
      */
-    function all(): ?Collection
+    function all(): ?DatabaseList
     {
         $path = "/databases";
 
         $res = $this->notion->get($path, []);
         $body = json_decode($res->body(), 1);
 
-        return ResourceGenerator::parse($body);
+        if (empty($body)) return null;
+
+        return new DatabaseList($body);
     }
 
-    function find(string $dbId): ?ResourcesDatabase
+    function find(string $dbId): ?EntitiesDatabase
     {
         $path = "/databases/{$dbId}";
 
         $res = $this->notion->get($path);
         $body = json_decode($res->body(), 1);
 
-        return ResourceGenerator::parse($body);
+        return new EntitiesDatabase($body);
     }
 }

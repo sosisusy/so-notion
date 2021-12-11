@@ -6,7 +6,7 @@ use SoNotion\Resources\Materials\SelectOption;
 
 class MultiSelectProperty extends Property
 {
-    protected array $options;
+    protected ?array $options;
 
     function fillProperties(array $data)
     {

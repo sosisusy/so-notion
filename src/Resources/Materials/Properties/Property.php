@@ -12,49 +12,51 @@ class Property extends Resource
     protected string $type;
     protected ?string $name = null;
 
-    static function new(array $data)
+    static function new(?array $data)
     {
+        if (is_null($data)) return null;
+
         $type = Arr::get($data, "type");
 
         switch ($type) {
             case "title":
-                return TitleProperty::new($data);
+                return new TitleProperty($data);
             case "rich_text":
-                return RichTextProperty::new($data);
+                return new RichTextProperty($data);
             case "number":
-                return NumberProperty::new($data);
+                return new NumberProperty($data);
             case "select":
-                return SelectProperty::new($data);
+                return new SelectProperty($data);
             case "multi_select":
-                return MultiSelectProperty::new($data);
+                return new MultiSelectProperty($data);
             case "date":
-                return DateProperty::new($data);
+                return new DateProperty($data);
             case "people":
-                return PeopleProperty::new($data);
+                return new PeopleProperty($data);
             case "files":
-                return FilesProperty::new($data);
+                return new FilesProperty($data);
             case "checkbox":
-                return CheckboxProperty::new($data);
+                return new CheckboxProperty($data);
             case "url":
-                return UrlProperty::new($data);
+                return new UrlProperty($data);
             case "email":
-                return EmailProperty::new($data);
+                return new EmailProperty($data);
             case "phone_number":
-                return PhoneNumberProperty::new($data);
+                return new PhoneNumberProperty($data);
             case "formula":
-                return FormulaProperty::new($data);
+                return new FormulaProperty($data);
             case "relation":
-                return RelationProperty::new($data);
+                return new RelationProperty($data);
             case "rollup":
-                return RollupProperty::new($data);
+                return new RollupProperty($data);
             case "created_time":
-                return CreatedTimeProperty::new($data);
+                return new CreatedTimeProperty($data);
             case "created_by":
-                return CreatedByProperty::new($data);
+                return new CreatedByProperty($data);
             case "last_edited_time":
-                return LastEditedTimeProperty::new($data);
+                return new LastEditedTimeProperty($data);
             case "last_edited_by":
-                return LastEditedByProperty::new($data);
+                return new LastEditedByProperty($data);
         }
 
         throw new HandlingException("invalid type");
