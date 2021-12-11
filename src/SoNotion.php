@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\UnauthorizedException;
 use InvalidArgumentException;
 use SoNotion\Endpoints\Database;
-use SoNotion\Exceptions\SoNotionBadRequestException;
-use SoNotion\Exceptions\SoNotionUnauthorizedException;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class SoNotion

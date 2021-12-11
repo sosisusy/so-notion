@@ -7,7 +7,7 @@ use SoNotion\Resources\Entities\Database as EntitiesDatabase;
 use SoNotion\Resources\Lists\DatabaseList;
 
 /**
- * 데이터베이스 API 
+ * 데이터베이스 endpoint 
  */
 class Database extends Endpoint
 {
@@ -27,6 +27,9 @@ class Database extends Endpoint
         return new DatabaseList($body);
     }
 
+    /**
+     * 데이터베이스 조회
+     */
     function find(string $dbId): ?EntitiesDatabase
     {
         $path = "/databases/{$dbId}";
