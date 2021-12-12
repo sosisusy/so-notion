@@ -12,4 +12,11 @@ class UrlProperty extends Property
     {
         return $this->url;
     }
+
+    function getContents()
+    {
+        if (empty($this->url)) return null;
+
+        return $this->url->toArray();
+    }
 }

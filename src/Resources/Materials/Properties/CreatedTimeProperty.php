@@ -12,4 +12,11 @@ class CreatedTimeProperty extends Property
     {
         return $this->created_time;
     }
+
+    function getContents()
+    {
+        if (empty($this->created_time)) return null;
+
+        return $this->created_time->toArray();
+    }
 }

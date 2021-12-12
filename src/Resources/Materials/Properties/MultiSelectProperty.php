@@ -3,6 +3,7 @@
 namespace SoNotion\Resources\Materials\Properties;
 
 use SoNotion\Resources\Materials\SelectOption;
+use SoNotion\Resources\Resource;
 
 class MultiSelectProperty extends Property
 {
@@ -27,5 +28,18 @@ class MultiSelectProperty extends Property
     function getNumber()
     {
         return $this->number;
+    }
+
+    function getContents()
+    {
+        $results = [];
+
+        if (empty($this->options)) return null;
+
+        foreach ($this->options as $k => $option) {
+            if ($option instanceof Resource) $results[$k] = $option->toArray();
+        }
+
+        return $results;
     }
 }

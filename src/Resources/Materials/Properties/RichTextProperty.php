@@ -12,4 +12,11 @@ class RichTextProperty extends Property
     {
         return $this->rich_text;
     }
+
+    function getContents()
+    {
+        if (empty($this->rich_text)) return null;
+
+        return $this->rich_text->toArray();
+    }
 }

@@ -12,4 +12,11 @@ class EmailProperty extends Property
     {
         return $this->email;
     }
+
+    function getContents()
+    {
+        if (empty($this->email)) return null;
+
+        return $this->email->toArray();
+    }
 }

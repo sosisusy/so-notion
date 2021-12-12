@@ -12,4 +12,11 @@ class FormulaProperty extends Property
     {
         return $this->formula;
     }
+
+    function getContents()
+    {
+        if (empty($this->formula)) return null;
+
+        return $this->formula->toArray();
+    }
 }

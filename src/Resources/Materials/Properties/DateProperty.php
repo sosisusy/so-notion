@@ -12,4 +12,11 @@ class DateProperty extends Property
     {
         return $this->date;
     }
+
+    function getContents()
+    {
+        if (empty($this->date)) return null;
+
+        return $this->date->toArray();
+    }
 }

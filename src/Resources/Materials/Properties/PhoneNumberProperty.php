@@ -12,4 +12,11 @@ class PhoneNumberProperty extends Property
     {
         return $this->phone_number;
     }
+
+    function getContents()
+    {
+        if (empty($this->phone_number)) return null;
+
+        return $this->phone_number->toArray();
+    }
 }

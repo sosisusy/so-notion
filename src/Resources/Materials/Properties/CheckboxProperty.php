@@ -26,4 +26,11 @@ class CheckboxProperty extends Property
     {
         return $this->checkbox;
     }
+
+    function getContents()
+    {
+        if ($this->checkbox instanceof Checkbox) return $this->checkbox->toArray();
+
+        return $this->checkbox;
+    }
 }

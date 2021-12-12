@@ -12,4 +12,11 @@ class TitleProperty extends Property
     {
         return $this->title;
     }
+
+    function getContents()
+    {
+        if (empty($this->title)) return null;
+
+        return $this->title->toArray();
+    }
 }

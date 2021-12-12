@@ -12,4 +12,11 @@ class LastEditedByProperty extends Property
     {
         return $this->last_edited_by;
     }
+
+    function getContents()
+    {
+        if (empty($this->last_edited_by)) return null;
+
+        return $this->last_edited_by->toArray();
+    }
 }

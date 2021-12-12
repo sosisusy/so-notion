@@ -12,4 +12,11 @@ class PeopleProperty extends Property
     {
         return $this->people;
     }
+
+    function getContents()
+    {
+        if (empty($this->people)) return null;
+
+        return $this->people->toArray();
+    }
 }

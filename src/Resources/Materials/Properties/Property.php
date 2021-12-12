@@ -6,11 +6,13 @@ use Illuminate\Support\Arr;
 use SoNotion\Exceptions\HandlingException;
 use SoNotion\Resources\Resource;
 
-class Property extends Resource
+abstract class Property extends Resource
 {
     protected ?string $id = null;
     protected string $type;
     protected ?string $name = null;
+
+    abstract function getContents();
 
     static function new(?array $data)
     {

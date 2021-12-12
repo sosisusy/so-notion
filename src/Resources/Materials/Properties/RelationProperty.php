@@ -12,4 +12,11 @@ class RelationProperty extends Property
     {
         return $this->relation;
     }
+
+    function getContents()
+    {
+        if (empty($this->relation)) return null;
+
+        return $this->relation->toArray();
+    }
 }

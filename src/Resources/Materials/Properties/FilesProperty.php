@@ -12,4 +12,11 @@ class FilesProperty extends Property
     {
         return $this->files;
     }
+
+    function getContents()
+    {
+        if (empty($this->files)) return null;
+
+        return $this->files->toArray();
+    }
 }

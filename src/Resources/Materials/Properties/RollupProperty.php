@@ -12,4 +12,11 @@ class RollupProperty extends Property
     {
         return $this->rollup;
     }
+
+    function getContents()
+    {
+        if (empty($this->rollup)) return null;
+
+        return $this->rollup->toArray();
+    }
 }

@@ -12,4 +12,11 @@ class CreatedByProperty extends Property
     {
         return $this->created_by;
     }
+
+    function getContents()
+    {
+        if (empty($this->created_by)) return null;
+
+        return $this->created_by->toArray();
+    }
 }

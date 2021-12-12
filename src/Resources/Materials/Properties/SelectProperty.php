@@ -3,6 +3,7 @@
 namespace SoNotion\Resources\Materials\Properties;
 
 use SoNotion\Resources\Materials\SelectOption;
+use SoNotion\Resources\Resource;
 
 class SelectProperty extends Property
 {
@@ -25,8 +26,33 @@ class SelectProperty extends Property
         foreach ($data["options"] as $k => $item) $this->options[$k] = SelectOption::new($item);
     }
 
-    function getNumber()
+    function getOptions()
     {
-        return $this->number;
+        return $this->options;
+    }
+
+    function getSelect()
+    {
+        return $this->select;
+    }
+
+    function getContents()
+    {
+
+        if (!empty($this->options)) {
+            $results = [];
+
+            foreach ($this->options as $k => $option) {
+                if ($option instanceof Resource) $results[$k] = $option->toArray();
+            }
+
+            return $results;
+        }
+
+        if (!empty($this->select)) {
+            return $this->select->toArray();
+        }
+
+        return null;
     }
 }
