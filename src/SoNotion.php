@@ -2,121 +2,49 @@
 
 namespace SoNotion;
 
-use Illuminate\Http\Client\PendingRequest;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Validation\UnauthorizedException;
-use InvalidArgumentException;
 use SoNotion\Endpoints\Database;
-use SoNotion\Endpoints\Page;
-use Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use SoNotion\Endpoints\Databases;
+use SoNotion\Endpoints\Search;
 
 class SoNotion
 {
-    const BASE_URI = "https://api.notion.com";
-    const DATABASE = "database";
-    const PAGE = "page";
-    const USER = "user";
-    const BLOCK = "block";
+    const BASE_URI = "https://api.notion.com/v1";
+    const VERSION = '2021-08-16';
 
     protected string $accessKey;
 
-    protected PendingRequest $client;
-
-    protected string $version;
-
-    function __construct(string $accessKey, $version = "v1")
+    function __construct(string $accessKey)
     {
         $this->accessKey = $accessKey;
-        $this->version = $version;
-        $this->client = $this->makeConnection();
     }
 
-    function makeConnection()
+    function getAccessKey()
     {
-        return Http::withHeaders([
-            "Notion-Version" => "2021-08-16",
-        ])
-            ->withToken($this->accessKey);
+        return $this->accessKey;
     }
 
-    function baseUrl()
+    function getVersion()
     {
-        return static::BASE_URI . "/" . $this->version;
+        return static::VERSION;
     }
 
-    function apiUrl(string $path)
+    function getBaseUrl()
     {
-        return $this->baseUrl() . $path;
+        return static::BASE_URI;
     }
 
-    function get(string $path, array $data = [])
+    function databases()
     {
-        return $this->send('get', $path, $data);
+        return new Databases($this);
     }
 
-    function post(string $path, array $data = [])
+    function database(string $databaseId)
     {
-        return $this->send('post', $path, $data);
+        return new Database($this, $databaseId);
     }
 
-    function put(string $path, array $data = [])
+    function search()
     {
-        return $this->send('put', $path, $data);
-    }
-
-    function patch(string $path, array $data = [])
-    {
-        return $this->send('patch', $path, $data);
-    }
-
-    function delete(string $path, array $data = [])
-    {
-        return $this->send('delete', $path, $data);
-    }
-
-    function send(string $method, string $path, array $data = []): \Illuminate\Http\Client\Response
-    {
-        $res = null;
-        $path = $this->apiUrl($path);
-        switch (strtolower($method)) {
-            case "get":
-            case "post":
-            case "put":
-            case "patch":
-            case "delete":
-                $res = $this->client->{$method}($path, $data);
-                break;
-            default:
-                throw new InvalidArgumentException("{$method} 은 Http 메서드가 아닙니다.");
-        }
-
-        if ($res->failed()) {
-            $body = json_decode($res->body(), true);
-
-            switch ($res->status()) {
-                case 401:
-                    throw new UnauthorizedException($body["message"] ?? "", $res->status());
-                case 400:
-                    throw new BadRequestException($body["message"] ?? "", $res->status());
-            }
-        }
-
-        return $res;
-    }
-
-    /**
-     * 데이터베이스 클라이언트 리턴
-     */
-    function database()
-    {
-        return new Database($this);
-    }
-
-    /**
-     * 데이터베이스 클라이언트 리턴
-     */
-    function page()
-    {
-        return new Page($this);
+        return new Search($this);
     }
 }

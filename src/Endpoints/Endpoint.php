@@ -3,42 +3,35 @@
 namespace SoNotion\Endpoints;
 
 use SoNotion\SoNotion;
+use SoNotion\SoNotionClient;
 
-abstract class Endpoint
+class Endpoint
 {
     protected SoNotion $notion;
-    protected ?string $cursor = null;
-    protected ?int $pageSize = null;
+    protected SoNotionClient $client;
+
+    protected ?string $startCursor;
+    protected int $pageSize = 100;
 
     function __construct(SoNotion $notion)
     {
         $this->notion = $notion;
+        $this->client = new SoNotionClient(
+            $notion->getBaseUrl(),
+            $notion->getAccessKey(),
+            $notion->getVersion()
+        );
     }
 
-    function setStartCursor(string $cursor)
+    function limit(int $size)
     {
-        $this->startCursor = $cursor;
+        $this->pageSize = min($size, 100);
         return $this;
     }
 
-    function setPageSize(int $pageSize)
+    function offset(string $startCursor)
     {
-        $this->pageSize = min($pageSize, 100);
+        $this->startCursor = $startCursor;
         return $this;
-    }
-
-    protected function makeParams(): array
-    {
-        $params = [];
-
-        if (!is_null($this->cursor)) $params['start_cursor'] = $this->cursor;
-        if (!is_null($this->pageSize)) $params['page_size'] = $this->pageSize;
-
-        return $params;
-    }
-
-    function getParams(): array
-    {
-        return $this->makeParams();
     }
 }
