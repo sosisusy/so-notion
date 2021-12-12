@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\UnauthorizedException;
 use InvalidArgumentException;
 use SoNotion\Endpoints\Database;
+use SoNotion\Endpoints\Page;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class SoNotion
@@ -109,5 +110,13 @@ class SoNotion
     function database()
     {
         return new Database($this);
+    }
+
+    /**
+     * 데이터베이스 클라이언트 리턴
+     */
+    function page()
+    {
+        return new Page($this);
     }
 }

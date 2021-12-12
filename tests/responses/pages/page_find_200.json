@@ -1,0 +1,47 @@
+{
+    "object": "page",
+    "id": "a544af91-aa9d-4d0e-bbd4-b5067efb4e01",
+    "created_time": "2021-12-09T13:38:00.000Z",
+    "last_edited_time": "2021-12-12T06:48:00.000Z",
+    "cover": {
+        "type": "external",
+        "external": {
+            "url": "https://www.notion.so/images/page-cover/gradients_11.jpg"
+        }
+    },
+    "icon": {
+        "type": "emoji",
+        "emoji": "🩴"
+    },
+    "parent": {
+        "type": "workspace",
+        "workspace": true
+    },
+    "archived": false,
+    "properties": {
+        "title": {
+            "id": "title",
+            "type": "title",
+            "title": [
+                {
+                    "type": "text",
+                    "text": {
+                        "content": "asdasda wdasdrydrhjsrt",
+                        "link": null
+                    },
+                    "annotations": {
+                        "bold": false,
+                        "italic": false,
+                        "strikethrough": false,
+                        "underline": false,
+                        "code": false,
+                        "color": "default"
+                    },
+                    "plain_text": "asdasda wdasdrydrhjsrt",
+                    "href": null
+                }
+            ]
+        }
+    },
+    "url": "https://www.notion.so/asdasda-wdasdrydrhjsrt-a544af91aa9d4d0ebbd4b5067efb4e01"
+}
