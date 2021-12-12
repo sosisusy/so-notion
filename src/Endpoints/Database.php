@@ -2,49 +2,84 @@
 
 namespace SoNotion\Endpoints;
 
-use SoNotion\Endpoints\Builders\DatabaseQueryBuilder;
-use SoNotion\Resources\Lists\DatabaseList;
-use SoNotion\Resources\Records\Database as RecordsDatabase;
+use Illuminate\Support\Collection;
+use SoNotion\Entities\EntityCollection;
+use SoNotion\Query\Filter;
+use SoNotion\Query\Sortting;
+use SoNotion\SoNotion;
 
-/**
- * 데이터베이스 endpoint 
- */
 class Database extends Endpoint
 {
+    protected string $dbId;
+    protected Collection $filters;
+    protected Collection $sorts;
 
-    /**
-     * 데이터베이스 전체 목록 조회
-     */
-    function all(): ?DatabaseList
+    function __construct(SoNotion $notion, string $dbId)
     {
-        $path = "/databases";
+        parent::__construct($notion);
 
-        $res = $this->notion->get($path, []);
-        $body = json_decode($res->body(), 1);
-
-        if (empty($body)) return null;
-
-        return new DatabaseList($body);
+        $this->dbId = $dbId;
+        $this->filters = new Collection();
+        $this->sorts = new Collection();
     }
 
     /**
-     * 데이터베이스 조회
+     * 필터 추가
      */
-    function find(string $dbId): ?RecordsDatabase
+    function addFilter(string $filterType, string $property, array $where)
     {
-        $path = "/databases/{$dbId}";
+        $this->filters->add(new Filter($filterType, $property, $where));
 
-        $res = $this->notion->get($path);
-        $body = json_decode($res->body(), 1);
-
-        return new RecordsDatabase($body);
+        return $this;
     }
 
     /**
-     * 쿼리 빌더 리턴
+     * 정렬 추가
      */
-    function query(string $dbId)
+    function addSort(string $property, ?string $timestamp = null, ?string $direction = null)
     {
-        return new DatabaseQueryBuilder($this->notion, $dbId);
+        $this->sorts->add(new Sortting($property, $timestamp, $direction));
+
+        return $this;
+    }
+
+    function filterQuery()
+    {
+        $results = [];
+
+        foreach ($this->filters->toArray() as $filter) {
+            if ($filter instanceof Filter) $results[] = $filter->toArray();
+        }
+
+        return $results;
+    }
+
+    function sortQuery()
+    {
+        $results = [];
+
+        foreach ($this->sorts->toArray() as $sortting) {
+            if ($sortting instanceof Sortting) $results[] = $sortting->toArray();
+        }
+
+        return $results;
+    }
+
+    /**
+     * 조회
+     */
+    function get()
+    {
+        $path = "/databases/{$this->dbId}/query";
+        $params = [];
+
+        if (!empty($this->startCursor)) $params['start_cursor'] = $this->startCursor;
+        if (!empty($this->pageSize)) $params['page_size'] = $this->pageSize;
+        if ($this->filters->isNotEmpty()) $params['filter']['or'] = $this->filterQuery();
+        if ($this->sorts->isNotEmpty()) $params['sorts'] = $this->sortQuery();
+
+        $res = $this->client->post($path, $params);
+
+        return EntityCollection::fromJson($res->body());
     }
 }
