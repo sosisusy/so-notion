@@ -12,4 +12,9 @@ class ExternalFile extends File
     {
         return $this->external;
     }
+
+    function getUrl(): string
+    {
+        return $this->external->getUrl();
+    }
 }

@@ -12,4 +12,9 @@ class UploadedFile extends File
     {
         return $this->file;
     }
+
+    function getUrl(): string
+    {
+        return $this->file->getUrl();
+    }
 }

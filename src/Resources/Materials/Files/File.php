@@ -6,9 +6,11 @@ use Illuminate\Support\Arr;
 use SoNotion\Exceptions\HandlingException;
 use SoNotion\Resources\Resource;
 
-class File extends Resource
+abstract class File extends Resource
 {
     protected string $type;
+
+    abstract function getUrl(): string;
 
     static function new(?array $data)
     {
