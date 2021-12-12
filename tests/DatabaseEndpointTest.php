@@ -143,7 +143,7 @@ class DatabaseEndpointTest extends SoNotionTest
             ->query('a3cc6ba5fe394397a9b9c7c645701f09')
             ->addFilter(FilterType::TEXT, '이름', [FilterOperator::CONTAINS => '카드 1'])
             ->addSort('이름', null, Sort::DIRECTION_DESC)
-            ->pageSize(50);
+            ->setPageSize(50);
 
         $this->assertEquals($expectParams, $query->getParams());
         $this->assertInstanceOf(PageList::class, $query->get());

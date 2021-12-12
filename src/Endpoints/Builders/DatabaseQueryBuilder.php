@@ -5,9 +5,7 @@ namespace SoNotion\Endpoints\Builders;
 use SoNotion\Endpoints\Endpoint;
 use SoNotion\Query\Filters\Filter;
 use SoNotion\Query\Filters\FilterFactory;
-use SoNotion\Query\PageSize;
 use SoNotion\Query\Sort;
-use SoNotion\Query\StartCursor;
 use SoNotion\Resources\Lists\PageList;
 use SoNotion\SoNotion;
 
@@ -16,8 +14,8 @@ class DatabaseQueryBuilder extends Endpoint implements Builder
     protected string $dbId;
     protected array $filter;
     protected array $sorts;
-    protected ?StartCursor $cursor = null;
-    protected ?PageSize $pageSize = null;
+    protected ?string $cursor = null;
+    protected ?int $pageSize = null;
 
     function __construct(SoNotion $notion, string $dbId)
     {
@@ -38,20 +36,6 @@ class DatabaseQueryBuilder extends Endpoint implements Builder
     function addSort(string $property, ?string $timestamp = null, ?string $direction = null)
     {
         $this->sorts[] = new Sort($property, $timestamp, $direction);
-
-        return $this;
-    }
-
-    function startCursor(string $cursor)
-    {
-        $this->cursor = new StartCursor($cursor);
-
-        return $this;
-    }
-
-    function pageSize(int $size)
-    {
-        $this->pageSize = new PageSize($size);
 
         return $this;
     }
@@ -78,21 +62,14 @@ class DatabaseQueryBuilder extends Endpoint implements Builder
         return $results;
     }
 
-    private function makeParams()
+    protected function makeParams(): array
     {
-        $params = [];
+        $params = parent::makeParams();
 
         if (!empty($this->filter)) $params['filter']['or'] = $this->filterQuery();
         if (!empty($this->sorts)) $params['sorts'] = $this->sortsQuery();
-        if (!is_null($this->cursor)) $params['start_cursor'] = $this->cursor->getStartCursor();
-        if (!is_null($this->pageSize)) $params['page_size'] = $this->pageSize->getPageSize();
 
         return $params;
-    }
-
-    function getParams()
-    {
-        return $this->makeParams();
     }
 
     function get(): PageList
