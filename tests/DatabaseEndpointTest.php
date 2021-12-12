@@ -3,14 +3,13 @@
 namespace Tests\Endpoints;
 
 use Illuminate\Support\Facades\Http;
-use Illuminate\Validation\UnauthorizedException;
 use SoNotion\Endpoints\Database;
 use SoNotion\Query\Filters\FilterOperator;
 use SoNotion\Query\Filters\FilterType;
 use SoNotion\Query\Sort;
-use SoNotion\Resources\Entities\Database as EntitiesDatabase;
 use SoNotion\Resources\Lists\DatabaseList;
 use SoNotion\Resources\Lists\PageList;
+use SoNotion\Resources\Records\Database as RecordsDatabase;
 use Tests\SoNotionTest;
 use SoNotion\SoNotionFacade;
 
@@ -92,7 +91,7 @@ class DatabaseEndpointTest extends SoNotionTest
 
         $result = SoNotionFacade::database()->find('a3cc6ba5fe394397a9b9c7c645701f09');
 
-        $this->assertInstanceOf(EntitiesDatabase::class, $result);
+        $this->assertInstanceOf(RecordsDatabase::class, $result);
     }
 
     /**

@@ -4,7 +4,7 @@ namespace SoNotion\Resources\Lists;
 
 use SoNotion\Resources\Resource;
 
-class EntityList extends Resource
+class RecordList extends Resource
 {
     protected string $object;
     protected bool $has_more;

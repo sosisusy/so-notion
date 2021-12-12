@@ -2,9 +2,9 @@
 
 namespace SoNotion\Resources\Lists;
 
-use SoNotion\Resources\Entities\Database;
+use SoNotion\Resources\Records\Database;
 
-class DatabaseList extends EntityList
+class DatabaseList extends RecordList
 {
 
     function fillProperties(array $data)

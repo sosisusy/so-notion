@@ -3,8 +3,8 @@
 namespace SoNotion\Endpoints;
 
 use SoNotion\Endpoints\Builders\DatabaseQueryBuilder;
-use SoNotion\Resources\Entities\Database as EntitiesDatabase;
 use SoNotion\Resources\Lists\DatabaseList;
+use SoNotion\Resources\Records\Database as RecordsDatabase;
 
 /**
  * 데이터베이스 endpoint 
@@ -30,14 +30,14 @@ class Database extends Endpoint
     /**
      * 데이터베이스 조회
      */
-    function find(string $dbId): ?EntitiesDatabase
+    function find(string $dbId): ?RecordsDatabase
     {
         $path = "/databases/{$dbId}";
 
         $res = $this->notion->get($path);
         $body = json_decode($res->body(), 1);
 
-        return new EntitiesDatabase($body);
+        return new RecordsDatabase($body);
     }
 
     /**

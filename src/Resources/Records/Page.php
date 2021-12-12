@@ -1,16 +1,16 @@
 <?php
 
-namespace SoNotion\Resources\Entities;
+namespace SoNotion\Resources\Records;
 
 use Illuminate\Support\Arr;
 use SoNotion\Exceptions\HandlingException;
-use SoNotion\Resources\Entities\Entity;
+use SoNotion\Resources\Records\Record;
 use SoNotion\Resources\Materials\Emoji\Emoji;
 use SoNotion\Resources\Materials\Files\File;
 use SoNotion\Resources\Materials\Parents\ParentObject;
 use SoNotion\Resources\Materials\Properties\Property;
 
-class Page extends Entity
+class Page extends Record
 {
     protected bool $archived;
     protected ?object $icon;

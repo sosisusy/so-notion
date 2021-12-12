@@ -1,10 +1,10 @@
 <?php
 
-namespace SoNotion\Resources\Entities;
+namespace SoNotion\Resources\Records;
 
 use SoNotion\Resources\Resource;
 
-class Entity extends Resource
+class Record extends Resource
 {
     protected string $object;
     protected string $id;
