@@ -61,7 +61,8 @@ class SearchTest extends SoNotionTest
         $res = SoNotionFacade::search()
             ->where('test')
             ->sortBy('ascending')
-            ->get('database');
+            ->only('database')
+            ->get();
 
         $databases = $res->getResults('database');
 
