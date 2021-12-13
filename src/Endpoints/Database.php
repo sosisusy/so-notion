@@ -78,7 +78,7 @@ class Database extends Endpoint
         if ($this->filters->isNotEmpty()) $params['filter']['or'] = $this->filterQuery();
         if ($this->sorts->isNotEmpty()) $params['sorts'] = $this->sortQuery();
 
-        $res = $this->client->post($path, $params);
+        $res = $this->notion->getConnection()->post($path, $params);
 
         return EntityCollection::fromJson($res->body());
     }
