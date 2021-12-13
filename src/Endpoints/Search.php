@@ -10,6 +10,7 @@ use SoNotion\SoNotion;
 
 class Search extends Endpoint
 {
+    protected ?string $only = null;
     protected ?string $query = null;
     protected ?Sortting $sort = null;
 
@@ -41,9 +42,21 @@ class Search extends Endpoint
     }
 
     /**
+     * 조회 대상 설정
+     * 
+     * @param   string  $only   page or database
+     */
+    function only(string $only)
+    {
+        $this->only = $only;
+
+        return $this;
+    }
+
+    /**
      * 조회
      */
-    function get(string $only = null)
+    function get()
     {
         $path = "/search";
         $params = [];
@@ -53,11 +66,11 @@ class Search extends Endpoint
         if (!empty($this->pageSize)) $params['page_size'] = $this->pageSize;
         if (!is_null($this->sort)) $params['sort'] = $this->sort->toArray();
 
-        if (!is_null($only)) {
-            switch ($only) {
+        if (!is_null($this->only)) {
+            switch ($this->only) {
                 case 'page':
                 case 'database':
-                    $params['filter'] = ['value' => $only, 'property' => 'object'];
+                    $params['filter'] = ['value' => $this->only, 'property' => 'object'];
                     break;
             }
         }
