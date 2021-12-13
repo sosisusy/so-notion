@@ -18,7 +18,7 @@ class Databases extends Endpoint
         if (!empty($this->startCursor)) $params['start_cursor'] = $this->startCursor;
         if (!empty($this->pageSize)) $params['page_size'] = $this->pageSize;
 
-        $res = $this->client->get($path, $params);
+        $res = $this->notion->getConnection()->get($path, $params);
 
         return EntityCollection::fromJson($res->body());
     }
@@ -29,7 +29,7 @@ class Databases extends Endpoint
     function find(string $dbId)
     {
         $path = "/databases/{$dbId}";
-        $res = $this->client->get($path, []);
+        $res = $this->notion->getConnection()->get($path, []);
 
         return Database::fromJson($res->body());
     }

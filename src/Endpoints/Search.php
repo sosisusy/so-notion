@@ -74,7 +74,7 @@ class Search extends Endpoint
             $params['filter'] = ['value' => $this->only, 'property' => 'object'];
         }
 
-        $res = $this->client->post($path, $params);
+        $res = $this->notion->getConnection()->post($path, $params);
 
         return EntityCollection::fromJson($res->body());
     }
