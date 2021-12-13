@@ -3,6 +3,7 @@
 namespace SoNotion\Endpoints;
 
 use Illuminate\Support\Collection;
+use InvalidArgumentException;
 use SoNotion\Entities\EntityCollection;
 use SoNotion\Enum\TimestampTypes;
 use SoNotion\Query\Sortting;
@@ -13,6 +14,8 @@ class Search extends Endpoint
     protected ?string $only = null;
     protected ?string $query = null;
     protected ?Sortting $sort = null;
+
+    protected $allowedFilter = ['page', 'database'];
 
     function __construct(SoNotion $notion)
     {
@@ -48,6 +51,8 @@ class Search extends Endpoint
      */
     function only(string $only)
     {
+        if (!in_array($only, $this->allowedFilter))
+            throw new InvalidArgumentException("invalid filter type: a given {$only} is not allowed filter type");
         $this->only = $only;
 
         return $this;
@@ -65,14 +70,8 @@ class Search extends Endpoint
         if (!empty($this->startCursor)) $params['start_cursor'] = $this->startCursor;
         if (!empty($this->pageSize)) $params['page_size'] = $this->pageSize;
         if (!is_null($this->sort)) $params['sort'] = $this->sort->toArray();
-
-        if (!is_null($this->only)) {
-            switch ($this->only) {
-                case 'page':
-                case 'database':
-                    $params['filter'] = ['value' => $this->only, 'property' => 'object'];
-                    break;
-            }
+        if (!is_null($this->only) && in_array($this->only, $this->allowedFilter)) {
+            $params['filter'] = ['value' => $this->only, 'property' => 'object'];
         }
 
         $res = $this->client->post($path, $params);
