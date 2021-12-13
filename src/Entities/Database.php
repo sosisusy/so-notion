@@ -2,7 +2,6 @@
 
 namespace SoNotion\Entities;
 
-use Illuminate\Support\Collection;
 use SoNotion\Entities\Property;
 use SoNotion\Exceptions\HandlingException;
 

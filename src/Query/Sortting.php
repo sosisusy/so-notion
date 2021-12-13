@@ -48,9 +48,9 @@ class Sortting implements Query
     {
         $results = [];
 
-        if (is_null($this->property)) $results['property'] = $this->property;
-        if (is_null($this->timestamp)) $results['timestamp'] = $this->timestamp;
-        if (is_null($this->direction)) $results['direction'] = $this->direction;
+        if (!is_null($this->property)) $results['property'] = $this->property;
+        if (!is_null($this->timestamp)) $results['timestamp'] = $this->timestamp;
+        if (!is_null($this->direction)) $results['direction'] = $this->direction;
 
         return $results;
     }
